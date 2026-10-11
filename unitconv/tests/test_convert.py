@@ -50,6 +50,13 @@ class ConvertTests(unittest.TestCase):
             self.assertAlmostEqual(result, test_value, places=6,
                                    msg=f"Round-trip nmi -> {unit} -> nmi failed")
 
+    def test_nmi_to_meters_round_trip(self):
+        """Test round-trip conversion of 3.5 nautical miles to meters and back."""
+        nautical_miles = 3.5
+        meters = convert(nautical_miles, "nmi", "m")
+        result = convert(meters, "m", "nmi")
+        self.assertAlmostEqual(result, nautical_miles, places=6)
+
 
 if __name__ == "__main__":
     unittest.main()
