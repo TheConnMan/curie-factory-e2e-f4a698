@@ -21,6 +21,30 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_nmi_to_meters(self):
+        self.assertAlmostEqual(convert(1, "nmi", "m"), 1852.0)
+
+    def test_meters_to_nmi(self):
+        self.assertAlmostEqual(convert(1852, "m", "nmi"), 1.0)
+
+    def test_nmi_to_km(self):
+        self.assertAlmostEqual(convert(1, "nmi", "km"), 1.852)
+
+    def test_km_to_nmi(self):
+        self.assertAlmostEqual(convert(1.852, "km", "nmi"), 1.0)
+
+    def test_nmi_to_mi(self):
+        self.assertAlmostEqual(convert(1, "nmi", "mi"), 1.15078, places=4)
+
+    def test_mi_to_nmi(self):
+        self.assertAlmostEqual(convert(1.15078, "mi", "nmi"), 1.0, places=4)
+
+    def test_nmi_to_ft(self):
+        self.assertAlmostEqual(convert(1, "nmi", "ft"), 6076.115, places=2)
+
+    def test_ft_to_nmi(self):
+        self.assertAlmostEqual(convert(6076.115, "ft", "nmi"), 1.0, places=4)
+
 
 if __name__ == "__main__":
     unittest.main()
