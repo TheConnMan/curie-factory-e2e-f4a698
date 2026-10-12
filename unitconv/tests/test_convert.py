@@ -21,6 +21,40 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_celsius_to_kelvin(self):
+        self.assertAlmostEqual(convert(0, "c", "k"), 273.15)
+
+    def test_kelvin_to_celsius(self):
+        self.assertAlmostEqual(convert(273.15, "k", "c"), 0.0)
+
+    def test_fahrenheit_to_kelvin(self):
+        self.assertAlmostEqual(convert(32, "f", "k"), 273.15)
+
+    def test_kelvin_to_fahrenheit(self):
+        self.assertAlmostEqual(convert(273.15, "k", "f"), 32.0)
+
+    def test_kelvin_identity(self):
+        self.assertAlmostEqual(convert(300, "k", "k"), 300.0)
+
+    def test_celsius_identity(self):
+        self.assertAlmostEqual(convert(25, "c", "c"), 25.0)
+
+    def test_fahrenheit_identity(self):
+        self.assertAlmostEqual(convert(68, "f", "f"), 68.0)
+
+    def test_km_identity(self):
+        self.assertAlmostEqual(convert(5, "km", "km"), 5.0)
+
+    def test_celsius_kelvin_fahrenheit_consistency(self):
+        # c→k→f must agree with the existing direct c→f conversion.
+        self.assertAlmostEqual(
+            convert(convert(100, "c", "k"), "k", "f"),
+            convert(100, "c", "f"),
+        )
+        self.assertAlmostEqual(
+            convert(convert(100, "c", "k"), "k", "f"), 212.0
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
