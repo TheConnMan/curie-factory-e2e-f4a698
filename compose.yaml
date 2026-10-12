@@ -1,0 +1,22 @@
+# Two services, no bind mounts. Build context is uploaded to the daemon.
+# FIXTURE_PUBLISH is the host side of the web port, for example 127.0.0.1:18080
+# or 0.0.0.0:18080 when the daemon is a remote machine.
+services:
+  web:
+    build:
+      context: .
+    image: unitconv-fixture-web:${FIXTURE_NONCE:?set FIXTURE_NONCE}
+    labels:
+      curie.fixture.nonce: ${FIXTURE_NONCE:?set FIXTURE_NONCE}
+    environment:
+      FIXTURE_NONCE: ${FIXTURE_NONCE:?set FIXTURE_NONCE}
+    ports:
+      - "${FIXTURE_PUBLISH:?set FIXTURE_PUBLISH}:8080"
+
+  beacon:
+    image: alpine:3.20
+    labels:
+      curie.fixture.nonce: ${FIXTURE_NONCE:?set FIXTURE_NONCE}
+    environment:
+      FIXTURE_NONCE: ${FIXTURE_NONCE:?set FIXTURE_NONCE}
+    command: ["sh", "-c", "echo fixture-nonce=$$FIXTURE_NONCE"]
