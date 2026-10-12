@@ -9,7 +9,7 @@ LENGTH_TO_METERS = {
     "ft": 0.3048,
 }
 
-TEMPERATURE = {"c", "f"}
+TEMPERATURE = {"c", "f", "k"}
 
 
 class UnknownUnit(ValueError):
@@ -39,5 +39,13 @@ def _convert_temperature(value: float, src: str, dst: str) -> float:
     if src == dst:
         return value
     if src == "c":
-        return value * 9 / 5 + 32
-    return (value - 32) * 5 / 9
+        celsius = value
+    elif src == "f":
+        celsius = (value - 32) * 5 / 9
+    else:  # "k"
+        celsius = value - 273.15
+    if dst == "c":
+        return celsius
+    if dst == "f":
+        return celsius * 9 / 5 + 32
+    return celsius + 273.15  # "k"
