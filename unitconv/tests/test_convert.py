@@ -25,6 +25,11 @@ class ConvertTests(unittest.TestCase):
     def test_nmi_to_mi(self):
         self.assertAlmostEqual(convert(1, "nmi", "mi"), 1.15078, places=4)
 
+    def test_nmi_to_m_round_trip(self):
+        meters = convert(3.5, "nmi", "m")
+        self.assertAlmostEqual(meters, 3.5 * 1852.0)
+        self.assertAlmostEqual(convert(meters, "m", "nmi"), 3.5)
+
     def test_nmi_to_ft_round_trip(self):
         feet = convert(1, "nmi", "ft")
         self.assertAlmostEqual(convert(feet, "ft", "nmi"), 1.0)
