@@ -36,6 +36,11 @@ class ConvertTests(unittest.TestCase):
             self.assertAlmostEqual(convert(convert(7, unit, "nmi"), "nmi", unit), 7.0)
             self.assertAlmostEqual(convert(convert(7, "nmi", unit), unit, "nmi"), 7.0)
 
+    def test_nmi_3_5_meters_roundtrip(self):
+        meters = convert(3.5, "nmi", "m")
+        self.assertAlmostEqual(meters, 3.5 * 1852.0)
+        self.assertAlmostEqual(convert(meters, "m", "nmi"), 3.5)
+
     def test_nmi_temperature_mix_rejected(self):
         with self.assertRaises(ValueError):
             convert(1, "c", "nmi")
