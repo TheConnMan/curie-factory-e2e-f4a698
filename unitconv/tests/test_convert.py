@@ -21,6 +21,14 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_rope_and_pole_collected(self):
+        test_rope_and_pole()
+
+
+def test_rope_and_pole():
+    assert convert(1, 'rope', 'm') == 6.096
+    assert convert(1, 'pole', 'm') == 5.0292
+
 
 if __name__ == "__main__":
     unittest.main()

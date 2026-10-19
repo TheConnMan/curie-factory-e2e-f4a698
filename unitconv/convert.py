@@ -7,6 +7,8 @@ LENGTH_TO_METERS = {
     "km": 1000.0,
     "mi": 1609.344,
     "ft": 0.3048,
+    "rope": 6.096,
+    "pole": 5.0292,
 }
 
 TEMPERATURE = {"c", "f"}
