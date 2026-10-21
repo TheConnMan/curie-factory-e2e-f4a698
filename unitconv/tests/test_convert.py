@@ -34,6 +34,9 @@ class ConvertTests(unittest.TestCase):
     def test_nmi_km_roundtrip(self):
         self.assertAlmostEqual(convert(convert(3, "nmi", "km"), "km", "nmi"), 3.0)
 
+    def test_nmi_m_roundtrip(self):
+        self.assertAlmostEqual(convert(convert(3.5, "nmi", "m"), "m", "nmi"), 3.5)
+
     def test_unknown_unit(self):
         with self.assertRaises(UnknownUnit):
             convert(1, "parsec", "m")
