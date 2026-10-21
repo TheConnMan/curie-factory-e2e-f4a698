@@ -17,6 +17,12 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(UnknownUnit):
             convert(1, "parsec", "m")
 
+    def test_fathom_to_m(self):
+        self.assertAlmostEqual(convert(3, "fathom", "m"), 5.4864, places=4)
+
+    def test_m_to_fathom(self):
+        self.assertAlmostEqual(convert(1.8288, "m", "fathom"), 1.0, places=4)
+
     def test_mixed_categories_rejected(self):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
