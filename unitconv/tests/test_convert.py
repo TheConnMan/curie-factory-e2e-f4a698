@@ -23,6 +23,11 @@ class ConvertTests(unittest.TestCase):
     def test_m_to_fathom(self):
         self.assertAlmostEqual(convert(1.8288, "m", "fathom"), 1.0, places=4)
 
+    def test_fathom_m_round_trip(self):
+        metres = convert(3, "fathom", "m")
+        self.assertAlmostEqual(metres, 5.4864, places=4)
+        self.assertAlmostEqual(convert(metres, "m", "fathom"), 3.0, places=4)
+
     def test_mixed_categories_rejected(self):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
