@@ -19,6 +19,10 @@ class ConvertTests(unittest.TestCase):
     def test_meters_to_furlong(self):
         self.assertAlmostEqual(convert(201.168, "m", "fur"), 1.0)
 
+    def test_furlongs_to_meters_round_trip(self):
+        metres = convert(2, "fur", "m")
+        self.assertAlmostEqual(convert(metres, "m", "fur"), 2.0)
+
     def test_unknown_unit(self):
         with self.assertRaises(UnknownUnit):
             convert(1, "parsec", "m")
