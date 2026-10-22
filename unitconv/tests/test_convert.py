@@ -1,6 +1,6 @@
 import unittest
 
-from unitconv.convert import UnknownUnit, convert
+from unitconv.convert import LENGTH_TO_METERS, UnknownUnit, convert
 
 
 class ConvertTests(unittest.TestCase):
@@ -20,6 +20,18 @@ class ConvertTests(unittest.TestCase):
     def test_mixed_categories_rejected(self):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
+
+    def test_nmi_defined_as_1852_meters(self):
+        self.assertEqual(LENGTH_TO_METERS["nmi"], 1852.0)
+
+    def test_nmi_roundtrip_all_length_units(self):
+        for unit in LENGTH_TO_METERS:
+            with self.subTest(unit=unit):
+                self.assertAlmostEqual(
+                    convert(1, "nmi", unit), 1852.0 / LENGTH_TO_METERS[unit]
+                )
+                self.assertAlmostEqual(convert(1, unit, "nmi"), LENGTH_TO_METERS[unit] / 1852.0)
+                self.assertAlmostEqual(convert(convert(1, "nmi", unit), unit, "nmi"), 1.0)
 
 
 if __name__ == "__main__":
