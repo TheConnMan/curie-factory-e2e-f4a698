@@ -9,7 +9,10 @@ LENGTH_TO_METERS = {
     "ft": 0.3048,
 }
 
-TEMPERATURE = {"c", "f"}
+TEMPERATURE = {"c", "f", "k"}
+
+# Lowest physically valid value in each temperature unit (absolute zero).
+ABSOLUTE_ZERO = {"c": -273.15, "f": -459.67, "k": 0.0}
 
 
 class UnknownUnit(ValueError):
@@ -36,8 +39,18 @@ def convert(value: float, src: str, dst: str) -> float:
 
 
 def _convert_temperature(value: float, src: str, dst: str) -> float:
+    if value < ABSOLUTE_ZERO[src]:
+        raise ValueError(f"{value} {src} is below absolute zero")
     if src == dst:
         return value
     if src == "c":
-        return value * 9 / 5 + 32
-    return (value - 32) * 5 / 9
+        celsius = value
+    elif src == "k":
+        celsius = value - 273.15
+    else:
+        celsius = (value - 32) * 5 / 9
+    if dst == "c":
+        return celsius
+    if dst == "k":
+        return celsius + 273.15
+    return celsius * 9 / 5 + 32
