@@ -13,6 +13,12 @@ class ConvertTests(unittest.TestCase):
     def test_km_to_mi(self):
         self.assertAlmostEqual(convert(5, "km", "mi"), 3.10686, places=4)
 
+    def test_yd_to_m(self):
+        self.assertAlmostEqual(convert(1, "yd", "m"), 0.9144)
+
+    def test_ft_to_yd(self):
+        self.assertAlmostEqual(convert(3, "ft", "yd"), 1.0)
+
     def test_unknown_unit(self):
         with self.assertRaises(UnknownUnit):
             convert(1, "parsec", "m")
