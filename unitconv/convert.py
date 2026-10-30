@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 LENGTH_TO_METERS = {
+    "mm": 0.001,
     "m": 1.0,
     "km": 1000.0,
     "mi": 1609.344,
