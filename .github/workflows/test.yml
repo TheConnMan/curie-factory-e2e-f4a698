@@ -14,3 +14,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m unittest discover -s unitconv/tests -v
+  wave1-gate:
+    needs: unittest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sleep 120
+      - run: python -m unittest discover -s unitconv/tests -v
