@@ -1,0 +1,1 @@
+Campaign base advancement marker.
