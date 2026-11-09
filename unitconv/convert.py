@@ -7,6 +7,7 @@ LENGTH_TO_METERS = {
     "km": 1000.0,
     "mi": 1609.344,
     "ft": 0.3048,
+    "ftus": 1200 / 3937,
 }
 
 TEMPERATURE = {"c", "f"}

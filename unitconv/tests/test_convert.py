@@ -21,6 +21,28 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_ftus_to_meters(self):
+        self.assertAlmostEqual(convert(3937, "ftus", "m"), 1200.0)
+
+    def test_ftus_to_feet(self):
+        self.assertAlmostEqual(convert(1, "ftus", "ft"), 1.000002000004, places=9)
+
+    def test_ftus_to_every_other_length_unit(self):
+        expected = {
+            "m": 0.3048006096012192,
+            "km": 0.0003048006096012192,
+            "mi": 0.00018939431818257576,
+            "ft": 1.000002000004,
+        }
+        for unit, value in expected.items():
+            self.assertAlmostEqual(convert(1, "ftus", unit), value, places=9)
+
+    def test_every_other_length_unit_to_ftus(self):
+        for unit in ("m", "km", "mi", "ft"):
+            forward = convert(1, unit, "ftus")
+            back = convert(forward, "ftus", unit)
+            self.assertAlmostEqual(back, 1.0, places=9)
+
 
 if __name__ == "__main__":
     unittest.main()
