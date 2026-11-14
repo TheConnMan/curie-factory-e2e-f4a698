@@ -21,6 +21,19 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_yd_to_m(self):
+        self.assertAlmostEqual(convert(1, "yd", "m"), 0.9144)
+
+    def test_m_to_yd(self):
+        self.assertAlmostEqual(convert(1, "m", "yd"), 1 / 0.9144)
+
+    def test_uppercase_yd(self):
+        self.assertAlmostEqual(convert(1, "YD", "m"), 0.9144)
+
+    def test_mixed_temp_yard_rejected(self):
+        with self.assertRaises(ValueError):
+            convert(1, "c", "yd")
+
 
 if __name__ == "__main__":
     unittest.main()
