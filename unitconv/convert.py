@@ -11,6 +11,12 @@ LENGTH_TO_METERS = {
 
 TEMPERATURE = {"c", "f"}
 
+# Accepted spelling aliases that normalize to a canonical unit key.
+ALIASES = {
+    "meter": "m",
+    "metre": "m",
+}
+
 
 class UnknownUnit(ValueError):
     """Raised when a unit is not in the table."""
@@ -23,6 +29,8 @@ def convert(value: float, src: str, dst: str) -> float:
     """
     src = src.lower()
     dst = dst.lower()
+    src = ALIASES.get(src, src)
+    dst = ALIASES.get(dst, dst)
     if src in TEMPERATURE and dst in TEMPERATURE:
         return _convert_temperature(value, src, dst)
     if src in LENGTH_TO_METERS and dst in LENGTH_TO_METERS:
