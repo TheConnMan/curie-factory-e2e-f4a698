@@ -21,6 +21,25 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_meter_alias_source(self):
+        self.assertAlmostEqual(convert(1, "meter", "ft"), convert(1, "m", "ft"))
+
+    def test_metre_alias_source(self):
+        self.assertAlmostEqual(convert(1, "metre", "ft"), convert(1, "m", "ft"))
+
+    def test_metre_alias_destination_case_insensitive(self):
+        self.assertAlmostEqual(convert(1, "ft", "METRE"), convert(1, "ft", "m"))
+
+    def test_meter_alias_destination_case_insensitive(self):
+        self.assertAlmostEqual(convert(1, "ft", "Meter"), convert(1, "ft", "m"))
+
+    def test_alias_both_positions(self):
+        self.assertAlmostEqual(convert(2, "meter", "metre"), 2.0)
+
+    def test_unknown_alias_like_unit_still_raises(self):
+        with self.assertRaises(UnknownUnit):
+            convert(1, "meters", "m")
+
 
 if __name__ == "__main__":
     unittest.main()

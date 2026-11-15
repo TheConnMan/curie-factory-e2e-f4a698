@@ -9,3 +9,6 @@ python -m unittest discover -s unitconv/tests -v
 ```
 
 Supported: temperature (c, f), length (km, mi, m, ft).
+
+The length unit `m` also accepts the aliases `meter` and `metre`, in either
+position and case-insensitively (for example `100 metre ft`).
