@@ -21,6 +21,19 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_preferred_nmi_to_m(self):
+        self.assertAlmostEqual(convert(1, 'nmi', 'm'), 1852)
+
+    def test_preferred_m_to_nmi(self):
+        self.assertAlmostEqual(convert(1, 'm', 'nmi'), 1 / 1852)
+
+    def test_preferred_uppercase_nmi(self):
+        self.assertAlmostEqual(convert(1, 'NMI', 'm'), 1852)
+
+    def test_preferred_mixed_temperature_and_nmi_rejected(self):
+        with self.assertRaises(ValueError):
+            convert(1, 'c', 'nmi')
+
 
 if __name__ == "__main__":
     unittest.main()

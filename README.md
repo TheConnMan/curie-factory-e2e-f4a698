@@ -8,4 +8,4 @@ python -m unitconv 5 km mi      # 3.1069
 python -m unittest discover -s unitconv/tests -v
 ```
 
-Supported: temperature (c, f), length (km, mi, m, ft).
+Supported: temperature (c, f), length (km, mi, m, ft, nmi).
