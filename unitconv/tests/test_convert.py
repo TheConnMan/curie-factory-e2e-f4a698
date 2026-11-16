@@ -21,6 +21,19 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_preferred_inch_to_meter(self):
+        self.assertEqual(convert(1, "in", "m"), 0.0254)
+
+    def test_preferred_meter_to_inch(self):
+        self.assertEqual(convert(1, "m", "in"), 1 / 0.0254)
+
+    def test_preferred_uppercase_in(self):
+        self.assertEqual(convert(1, "IN", "m"), 0.0254)
+
+    def test_preferred_mixed_temp_inch_rejected(self):
+        with self.assertRaises(ValueError):
+            convert(1, "c", "in")
+
 
 if __name__ == "__main__":
     unittest.main()
