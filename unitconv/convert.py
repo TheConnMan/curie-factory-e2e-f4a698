@@ -27,7 +27,7 @@ def convert(value: float, src: str, dst: str) -> float:
         return _convert_temperature(value, src, dst)
     if src in LENGTH_TO_METERS and dst in LENGTH_TO_METERS:
         meters = value * LENGTH_TO_METERS[src]
-        return round(meters / LENGTH_TO_METERS[dst], 2)
+        return meters / LENGTH_TO_METERS[dst]
     if src not in TEMPERATURE and src not in LENGTH_TO_METERS:
         raise UnknownUnit(src)
     if dst not in TEMPERATURE and dst not in LENGTH_TO_METERS:
