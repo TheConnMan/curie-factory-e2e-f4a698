@@ -21,6 +21,10 @@ class ConvertTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             convert(1, "c", "m")
 
+    def test_cm(self):
+        self.assertAlmostEqual(convert(100, "cm", "m"), 1.0)
+        self.assertAlmostEqual(convert(1, "m", "cm"), 100.0)
+
 
 if __name__ == "__main__":
     unittest.main()
